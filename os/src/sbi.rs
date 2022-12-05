@@ -39,3 +39,13 @@ pub fn shutdown() -> ! {
     sbi_call(SBI_SHUTDOWN, 0, 0, 0);
     panic!("It should shutdown!");
 }
+
+//os/src/sbi.rs
+use crate::sbi::set_timer;
+use crate::config::CLOCK_FREQ;
+
+const TICKS_PER_SEC: usize = 100;
+
+pub fn set_next_trigger() {
+        set_timer(get_time() + CLOCK_FREQ / TICKS_PER_SEC);
+}
