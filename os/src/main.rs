@@ -41,4 +41,5 @@ pub fn rust_main() -> ! {
 }
 extern crate alloc;
 #![feature(alloc_error_handler)]
-
+#[macro_use]
+extern crate bitflags;
