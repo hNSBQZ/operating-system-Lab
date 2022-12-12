@@ -14,6 +14,7 @@ mod loader;
 mod config;
 mod task;
 mod timer;
+mod mm;
 
 global_asm!(include_str!("entry.asm"));
 global_asm!(include_str!("link_app.S"));
@@ -31,6 +32,7 @@ pub fn rust_main() -> ! {
     clear_bss();
     println!("[Kernel] Hello, world!");
     trap::init();
+    mm::init();
     loader::load_apps();
     trap::enable_timer_interrupt();
     timer::set_next_trigger();
@@ -38,3 +40,5 @@ pub fn rust_main() -> ! {
     panic!("Unreachable in rust_main!");
 }
 extern crate alloc;
+#![feature(alloc_error_handler)]
+
