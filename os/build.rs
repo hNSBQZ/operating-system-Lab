@@ -34,10 +34,14 @@ _num_app:
     }
     writeln!(f, r#"    .quad app_{}_end"#, apps.len() - 1)?;
 
-spp_names:"#)?;
-              for app in apps.iter() {
-                          writeln!(f, r#"    .string "{}""#, app)?;
-                              }h: line 1: global: command not found
+    writeln!(f, r#"
+    .global _app_names
+_app_names:"#)?;
+    for app in apps.iter() {
+        writeln!(f, r#"    .string "{}""#, app)?;
+    }
+
+    for (idx, app) in apps.iter().enumerate() {
         println!("app_{}: {}", idx, app);
         writeln!(f, r#"
     .section .data
